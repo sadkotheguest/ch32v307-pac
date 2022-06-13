@@ -58,6 +58,54 @@ impl Deref for TRNG {
 #[doc = "Random number generator"]
 pub mod trng;
 
+// --------------------------- CAN -----------------------------------
+#[doc = "Controller area network CAN1"]
+pub struct CAN1 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for CAN1 {}
+impl CAN1 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const can1::RegisterBlock = 0x4000_6400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const can1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for CAN1 {
+    type Target = can1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Controller area network"]
+pub mod can1;
+
+#[doc = "Controller area network CAN2"]
+pub struct CAN2 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for CAN2 {}
+impl CAN2 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const can1::RegisterBlock = 0x4000_6400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const can1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for CAN2 {
+    type Target = can1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Controller area network"]
+pub use can1 as can2;
 
 // -------------------------- GPIOA ----------------------------------
 #[doc = "General purpose I/O"]
@@ -220,10 +268,10 @@ pub struct Peripherals {
     pub TRNG: TRNG,
     // #[doc = "USB"]
     // pub USB: USB,
-    // #[doc = "CAN1"]
-    // pub CAN1: CAN1,
-    // #[doc = "CAN2"]
-    // pub CAN2: CAN2,
+    #[doc = "CAN1"]
+    pub CAN1: CAN1,
+    #[doc = "CAN2"]
+    pub CAN2: CAN2,
     // #[doc = "ETHERNET_MAC"]
     // pub ETHERNET_MAC: ETHERNET_MAC,
     // #[doc = "ETHERNET_MMC"]
@@ -356,12 +404,12 @@ impl Peripherals {
             // USB: USB {
             //     _marker: PhantomData,
             // },
-            // CAN1: CAN1 {
-            //     _marker: PhantomData,
-            // },
-            // CAN2: CAN2 {
-            //     _marker: PhantomData,
-            // },
+            CAN1: CAN1 {
+                _marker: PhantomData,
+            },
+            CAN2: CAN2 {
+                _marker: PhantomData,
+            },
             // ETHERNET_MAC: ETHERNET_MAC {
             //     _marker: PhantomData,
             // },
