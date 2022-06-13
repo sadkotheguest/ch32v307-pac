@@ -32,6 +32,6 @@ Peripherials:
 * DBG [-]
 * USBHD [-]
 * CRC [+]
-* FLASH [-]
+* FLASH [+]
 * USB FS OTG [-]
 * PFIC [-]

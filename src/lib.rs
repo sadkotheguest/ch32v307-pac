@@ -183,3 +183,347 @@ impl Deref for CRC {
 }
 #[doc = "CRC calculation unit"]
 pub mod crc;
+
+// ------------------------- FLASH ---------------------------------
+#[doc = "FLASH"]
+pub struct FLASH {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for FLASH {}
+impl FLASH {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const flash::RegisterBlock = 0x4002_2000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const flash::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for FLASH {
+    type Target = flash::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "FLASH"]
+pub mod flash;
+
+// -----------------------------------------------------------------
+
+#[no_mangle]
+static mut DEVICE_PERIPHERALS: bool = false;
+#[doc = r"All the peripherals"]
+#[allow(non_snake_case)]
+pub struct Peripherals {
+    #[doc = "TRNG"]
+    pub TRNG: TRNG,
+    // #[doc = "USB"]
+    // pub USB: USB,
+    // #[doc = "CAN1"]
+    // pub CAN1: CAN1,
+    // #[doc = "CAN2"]
+    // pub CAN2: CAN2,
+    // #[doc = "ETHERNET_MAC"]
+    // pub ETHERNET_MAC: ETHERNET_MAC,
+    // #[doc = "ETHERNET_MMC"]
+    // pub ETHERNET_MMC: ETHERNET_MMC,
+    // #[doc = "ETHERNET_PTP"]
+    // pub ETHERNET_PTP: ETHERNET_PTP,
+    // #[doc = "ETHERNET_DMA"]
+    // pub ETHERNET_DMA: ETHERNET_DMA,
+    // #[doc = "SDIO"]
+    // pub SDIO: SDIO,
+    // #[doc = "FSMC"]
+    // pub FSMC: FSMC,
+    // #[doc = "DVP"]
+    // pub DVP: DVP,
+    // #[doc = "DAC"]
+    // pub DAC: DAC,
+    #[doc = "PWR"]
+    pub PWR: PWR,
+    #[doc = "RCC"]
+    pub RCC: RCC,
+    // #[doc = "EXTEND"]
+    // pub EXTEND: EXTEND,
+    // #[doc = "OPA"]
+    // pub OPA: OPA,
+    #[doc = "GPIOA"]
+    pub GPIOA: GPIOA,
+    // #[doc = "GPIOB"]
+    // pub GPIOB: GPIOB,
+    // #[doc = "GPIOC"]
+    // pub GPIOC: GPIOC,
+    // #[doc = "GPIOD"]
+    // pub GPIOD: GPIOD,
+    // #[doc = "GPIOE"]
+    // pub GPIOE: GPIOE,
+    #[doc = "AFIO"]
+    pub AFIO: AFIO,
+    // #[doc = "EXTI"]
+    // pub EXTI: EXTI,
+    // #[doc = "DMA1"]
+    // pub DMA1: DMA1,
+    // #[doc = "DMA2"]
+    // pub DMA2: DMA2,
+    // #[doc = "RTC"]
+    // pub RTC: RTC,
+    // #[doc = "BKP"]
+    // pub BKP: BKP,
+    // #[doc = "IWDG"]
+    // pub IWDG: IWDG,
+    // #[doc = "WWDG"]
+    // pub WWDG: WWDG,
+    // #[doc = "TIM1"]
+    // pub TIM1: TIM1,
+    // #[doc = "TIM8"]
+    // pub TIM8: TIM8,
+    // #[doc = "TIM9"]
+    // pub TIM9: TIM9,
+    // #[doc = "TIM10"]
+    // pub TIM10: TIM10,
+    // #[doc = "TIM2"]
+    // pub TIM2: TIM2,
+    // #[doc = "TIM3"]
+    // pub TIM3: TIM3,
+    // #[doc = "TIM4"]
+    // pub TIM4: TIM4,
+    // #[doc = "TIM5"]
+    // pub TIM5: TIM5,
+    // #[doc = "I2C1"]
+    // pub I2C1: I2C1,
+    // #[doc = "I2C2"]
+    // pub I2C2: I2C2,
+    // #[doc = "SPI1"]
+    // pub SPI1: SPI1,
+    // #[doc = "SPI2"]
+    // pub SPI2: SPI2,
+    // #[doc = "SPI3"]
+    // pub SPI3: SPI3,
+    // #[doc = "USART1"]
+    // pub USART1: USART1,
+    // #[doc = "USART2"]
+    // pub USART2: USART2,
+    // #[doc = "USART3"]
+    // pub USART3: USART3,
+    // #[doc = "UART4"]
+    // pub UART4: UART4,
+    // #[doc = "UART5"]
+    // pub UART5: UART5,
+    // #[doc = "UART6"]
+    // pub UART6: UART6,
+    // #[doc = "UART7"]
+    // pub UART7: UART7,
+    // #[doc = "UART8"]
+    // pub UART8: UART8,
+    // #[doc = "ADC1"]
+    // pub ADC1: ADC1,
+    // #[doc = "ADC2"]
+    // pub ADC2: ADC2,
+    // #[doc = "DBG"]
+    // pub DBG: DBG,
+    // #[doc = "USBHD"]
+    // pub USBHD: USBHD,
+    #[doc = "CRC"]
+    pub CRC: CRC,
+    #[doc = "FLASH"]
+    pub FLASH: FLASH,
+    // #[doc = "USBOTGFS"]
+    // pub USBOTGFS: USBOTGFS,
+    // #[doc = "PFIC"]
+    // pub PFIC: PFIC,
+}
+impl Peripherals {
+    #[doc = r"Returns all the peripherals *once*"]
+    #[inline]
+    pub fn take() -> Option<Self> {
+        riscv::interrupt::free(|_| {
+            if unsafe { DEVICE_PERIPHERALS } {
+                None
+            } else {
+                Some(unsafe { Peripherals::steal() })
+            }
+        })
+    }
+    #[doc = r"Unchecked version of `Peripherals::take`"]
+    #[inline]
+    pub unsafe fn steal() -> Self {
+        DEVICE_PERIPHERALS = true;
+        Peripherals {
+            TRNG: TRNG {
+                _marker: PhantomData,
+            },
+            // USB: USB {
+            //     _marker: PhantomData,
+            // },
+            // CAN1: CAN1 {
+            //     _marker: PhantomData,
+            // },
+            // CAN2: CAN2 {
+            //     _marker: PhantomData,
+            // },
+            // ETHERNET_MAC: ETHERNET_MAC {
+            //     _marker: PhantomData,
+            // },
+            // ETHERNET_MMC: ETHERNET_MMC {
+            //     _marker: PhantomData,
+            // },
+            // ETHERNET_PTP: ETHERNET_PTP {
+            //     _marker: PhantomData,
+            // },
+            // ETHERNET_DMA: ETHERNET_DMA {
+            //     _marker: PhantomData,
+            // },
+            // SDIO: SDIO {
+            //     _marker: PhantomData,
+            // },
+            // FSMC: FSMC {
+            //     _marker: PhantomData,
+            // },
+            // DVP: DVP {
+            //     _marker: PhantomData,
+            // },
+            // DAC: DAC {
+            //     _marker: PhantomData,
+            // },
+            PWR: PWR {
+                _marker: PhantomData,
+            },
+            RCC: RCC {
+                _marker: PhantomData,
+            },
+            // EXTEND: EXTEND {
+            //     _marker: PhantomData,
+            // },
+            // OPA: OPA {
+            //     _marker: PhantomData,
+            // },
+            GPIOA: GPIOA {
+                _marker: PhantomData,
+            },
+            // GPIOB: GPIOB {
+            //     _marker: PhantomData,
+            // },
+            // GPIOC: GPIOC {
+            //     _marker: PhantomData,
+            // },
+            // GPIOD: GPIOD {
+            //     _marker: PhantomData,
+            // },
+            // GPIOE: GPIOE {
+            //     _marker: PhantomData,
+            // },
+            AFIO: AFIO {
+                _marker: PhantomData,
+            },
+            // EXTI: EXTI {
+            //     _marker: PhantomData,
+            // },
+            // DMA1: DMA1 {
+            //     _marker: PhantomData,
+            // },
+            // DMA2: DMA2 {
+            //     _marker: PhantomData,
+            // },
+            // RTC: RTC {
+            //     _marker: PhantomData,
+            // },
+            // BKP: BKP {
+            //     _marker: PhantomData,
+            // },
+            // IWDG: IWDG {
+            //     _marker: PhantomData,
+            // },
+            // WWDG: WWDG {
+            //     _marker: PhantomData,
+            // },
+            // TIM1: TIM1 {
+            //     _marker: PhantomData,
+            // },
+            // TIM8: TIM8 {
+            //     _marker: PhantomData,
+            // },
+            // TIM9: TIM9 {
+            //     _marker: PhantomData,
+            // },
+            // TIM10: TIM10 {
+            //     _marker: PhantomData,
+            // },
+            // TIM2: TIM2 {
+            //     _marker: PhantomData,
+            // },
+            // TIM3: TIM3 {
+            //     _marker: PhantomData,
+            // },
+            // TIM4: TIM4 {
+            //     _marker: PhantomData,
+            // },
+            // TIM5: TIM5 {
+            //     _marker: PhantomData,
+            // },
+            // I2C1: I2C1 {
+            //     _marker: PhantomData,
+            // },
+            // I2C2: I2C2 {
+            //     _marker: PhantomData,
+            // },
+            // SPI1: SPI1 {
+            //     _marker: PhantomData,
+            // },
+            // SPI2: SPI2 {
+            //     _marker: PhantomData,
+            // },
+            // SPI3: SPI3 {
+            //     _marker: PhantomData,
+            // },
+            // USART1: USART1 {
+            //     _marker: PhantomData,
+            // },
+            // USART2: USART2 {
+            //     _marker: PhantomData,
+            // },
+            // USART3: USART3 {
+            //     _marker: PhantomData,
+            // },
+            // UART4: UART4 {
+            //     _marker: PhantomData,
+            // },
+            // UART5: UART5 {
+            //     _marker: PhantomData,
+            // },
+            // UART6: UART6 {
+            //     _marker: PhantomData,
+            // },
+            // UART7: UART7 {
+            //     _marker: PhantomData,
+            // },
+            // UART8: UART8 {
+            //     _marker: PhantomData,
+            // },
+            // ADC1: ADC1 {
+            //     _marker: PhantomData,
+            // },
+            // ADC2: ADC2 {
+            //     _marker: PhantomData,
+            // },
+            // DBG: DBG {
+            //     _marker: PhantomData,
+            // },
+            // USBHD: USBHD {
+            //     _marker: PhantomData,
+            // },
+            CRC: CRC {
+                _marker: PhantomData,
+            },
+            FLASH: FLASH {
+                _marker: PhantomData,
+            },
+            // USBOTGFS: USBOTGFS {
+            //     _marker: PhantomData,
+            // },
+            // PFIC: PFIC {
+            //     _marker: PhantomData,
+            // },
+        }
+    }
+}
