@@ -1,0 +1,18 @@
+[package]
+name = "ch32v307-pac"
+version = "0.1.0"
+authors = ["Alexander Buraga <sadkotheguest@yandex.ru>"]
+repository = "https://github.com/sadkotheguest/ch32v307-pac"
+categories = ["embedded", "hardware-support", "no-std"]
+description = "Peripheral access API for CH32V307 chips"
+keywords = ["riscv", "ch32", "register", "peripheral"]
+license = "ISC"
+edition = "2018"
+
+[dependencies]
+bare-metal = "0.2.5"
+riscv = "0.8.0"
+vcell = "0.1.2"
+
+[features]
+rt = []
