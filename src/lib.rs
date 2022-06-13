@@ -25,8 +25,8 @@ use core::ops::Deref;
 #[doc = r"Number available in the NVIC for configuring priority"]
 pub const NVIC_PRIO_BITS: u8 = 4;
 #[doc(hidden)]
-// pub mod interrupt;
-// pub use self::interrupt::Interrupt;
+pub mod interrupt;
+pub use self::interrupt::Interrupt;
 #[allow(unused_imports)]
 use generic::*;
 #[doc = r"Common register and bit access and modify traits"]
@@ -56,3 +56,53 @@ impl Deref for GPIOA {
 }
 #[doc = "General purpose I/O (GPIO port A)"]
 pub mod gpioa;
+
+// -------------------------- PWR ----------------------------------
+#[doc = "Power control"]
+pub struct PWR {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for PWR {}
+impl PWR {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const pwr::RegisterBlock = 0x4000_7000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const pwr::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for PWR {
+    type Target = pwr::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Power control"]
+pub mod pwr;
+
+// -------------------------- RCC ----------------------------------
+#[doc = "Reset and clock control"]
+pub struct RCC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for RCC {}
+impl RCC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const rcc::RegisterBlock = 0x4002_1000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const rcc::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for RCC {
+    type Target = rcc::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Reset and clock control"]
+pub mod rcc;

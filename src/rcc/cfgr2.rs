@@ -1,3 +1,4 @@
+#[doc = "Register `CFGR2` reader"]
 pub struct R(crate::R<CFGR2_SPEC>);
 impl core::ops::Deref for R {
     type Target = crate::R<CFGR2_SPEC>;

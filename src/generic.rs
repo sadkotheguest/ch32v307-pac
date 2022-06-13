@@ -1,4 +1,3 @@
-
 use core::marker;
 #[doc = " Raw register type"]
 pub trait RegisterSpec {
