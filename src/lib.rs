@@ -32,6 +32,33 @@ use generic::*;
 #[doc = r"Common register and bit access and modify traits"]
 pub mod generic;
 
+// --------------------------- TRNG ----------------------------------
+#[doc = "Random number generator"]
+pub struct TRNG {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TRNG {}
+impl TRNG {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const trng::RegisterBlock = 0x4002_3c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const trng::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TRNG {
+    type Target = trng::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+
+#[doc = "Random number generator"]
+pub mod trng;
+
+
 // -------------------------- GPIOA ----------------------------------
 #[doc = "General purpose I/O"]
 pub struct GPIOA {
