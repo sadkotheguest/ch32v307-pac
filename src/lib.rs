@@ -84,6 +84,31 @@ impl Deref for GPIOA {
 #[doc = "General purpose I/O (GPIO port A)"]
 pub mod gpioa;
 
+// -------------------------- AFIO ---------------------------------
+#[doc = "Alternate function I/O"]
+pub struct AFIO {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for AFIO {}
+impl AFIO {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const afio::RegisterBlock = 0x4001_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const afio::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for AFIO {
+    type Target = afio::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Alternate function I/O"]
+pub mod afio;
+
 // -------------------------- PWR ----------------------------------
 #[doc = "Power control"]
 pub struct PWR {
@@ -133,3 +158,28 @@ impl Deref for RCC {
 }
 #[doc = "Reset and clock control"]
 pub mod rcc;
+
+// -------------------------- CRC ----------------------------------
+#[doc = "CRC calculation unit"]
+pub struct CRC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for CRC {}
+impl CRC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const crc::RegisterBlock = 0x4002_3000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const crc::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for CRC {
+    type Target = crc::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "CRC calculation unit"]
+pub mod crc;
