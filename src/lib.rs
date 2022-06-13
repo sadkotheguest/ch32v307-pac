@@ -157,6 +157,31 @@ impl Deref for AFIO {
 #[doc = "Alternate function I/O"]
 pub mod afio;
 
+// -------------------------- EXTI ---------------------------------
+#[doc = "EXTI"]
+pub struct EXTI {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for EXTI {}
+impl EXTI {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const exti::RegisterBlock = 0x4001_0400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const exti::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for EXTI {
+    type Target = exti::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "EXTI"]
+pub mod exti;
+
 // -------------------------- PWR ----------------------------------
 #[doc = "Power control"]
 pub struct PWR {
@@ -308,8 +333,8 @@ pub struct Peripherals {
     // pub GPIOE: GPIOE,
     #[doc = "AFIO"]
     pub AFIO: AFIO,
-    // #[doc = "EXTI"]
-    // pub EXTI: EXTI,
+    #[doc = "EXTI"]
+    pub EXTI: EXTI,
     // #[doc = "DMA1"]
     // pub DMA1: DMA1,
     // #[doc = "DMA2"]
@@ -464,9 +489,9 @@ impl Peripherals {
             AFIO: AFIO {
                 _marker: PhantomData,
             },
-            // EXTI: EXTI {
-            //     _marker: PhantomData,
-            // },
+            EXTI: EXTI {
+                _marker: PhantomData,
+            },
             // DMA1: DMA1 {
             //     _marker: PhantomData,
             // },

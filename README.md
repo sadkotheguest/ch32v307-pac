@@ -6,7 +6,7 @@ This repository includes ch32v307-pac inspired by gd32vf103-pac (https://github.
 Peripherials:
 * TRNG [+]
 * USB [-]
-* CAN1 [-], CAN2 [-]
+* CAN1 [+], CAN2 [+]
 * ETHERNET_MAC [-], ETHERNET_MMC [-], ETHERNET_PTP [-], ETHERNET_DMA [-]
 * SDIO [-]
 * FSMC [-]
@@ -17,7 +17,7 @@ Peripherials:
 * OPA [-]
 * GPIOA [+], GPIOB [-], GPIOC [-], GPIOD [-], GPIOE [-]
 * AFIO [+]
-* EXTI [-]
+* EXTI [+]
 * DMA1 [-], DMA2 [-]
 * RTC [-]
 * BKP [-]
