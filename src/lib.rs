@@ -132,6 +132,31 @@ impl Deref for SDIO {
 #[doc = "Secure digital input/output interface"]
 pub mod sdio;
 
+// --------------------------- FSMC ----------------------------------
+#[doc = "Flexible static memory controller"]
+pub struct FSMC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for FSMC {}
+impl FSMC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const fsmc::RegisterBlock = 0xa000_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const fsmc::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for FSMC {
+    type Target = fsmc::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Flexible static memory controller"]
+pub mod fsmc;
+
 // -------------------------- GPIOA ----------------------------------
 #[doc = "General purpose I/O"]
 pub struct GPIOA {
@@ -438,8 +463,8 @@ pub struct Peripherals {
     // pub ETHERNET_DMA: ETHERNET_DMA,
     #[doc = "SDIO"]
     pub SDIO: SDIO,
-    // #[doc = "FSMC"]
-    // pub FSMC: FSMC,
+    #[doc = "FSMC"]
+    pub FSMC: FSMC,
     // #[doc = "DVP"]
     // pub DVP: DVP,
     #[doc = "DAC"]
@@ -581,9 +606,9 @@ impl Peripherals {
             SDIO: SDIO {
                 _marker: PhantomData,
             },
-            // FSMC: FSMC {
-            //     _marker: PhantomData,
-            // },
+            FSMC: FSMC {
+                _marker: PhantomData,
+            },
             // DVP: DVP {
             //     _marker: PhantomData,
             // },

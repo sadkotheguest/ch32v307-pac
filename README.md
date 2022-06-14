@@ -9,7 +9,7 @@ Peripherials:
 * CAN1 [+], CAN2 [+]
 * ETHERNET_MAC [-], ETHERNET_MMC [-], ETHERNET_PTP [-], ETHERNET_DMA [-]
 * SDIO [+]
-* FSMC [-]
+* FSMC [+]
 * DVP [-]
 * DAC [+]
 * PWR [+]
