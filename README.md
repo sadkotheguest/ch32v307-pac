@@ -18,7 +18,7 @@ Peripherials:
 * GPIOA [+], GPIOB [-], GPIOC [-], GPIOD [-], GPIOE [-]
 * AFIO [+]
 * EXTI [+]
-* DMA1 [-], DMA2 [-]
+* DMA1 [+], DMA2 [+]
 * RTC [-]
 * BKP [-]
 * IWDG [-]

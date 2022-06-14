@@ -182,6 +182,61 @@ impl Deref for EXTI {
 #[doc = "EXTI"]
 pub mod exti;
 
+// -------------------------- DMA1 ---------------------------------
+#[doc = "DMA1 controller"]
+pub struct DMA1 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for DMA1 {}
+impl DMA1 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const dma1::RegisterBlock = 0x4002_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const dma1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for DMA1 {
+    type Target = dma1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "DMA1 controller"]
+pub mod dma1;
+
+// -------------------------- DMA2 ---------------------------------
+#[doc = "DMA2 controller"]
+pub struct DMA2 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for DMA2 {}
+impl DMA2 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const dma2::RegisterBlock = 0x4002_0400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const dma2::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for DMA2 {
+    type Target = dma2::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for DMA2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DMA2").finish()
+    }
+}
+
+#[doc = "DMA2 controller"]
+pub mod dma2;
 // -------------------------- PWR ----------------------------------
 #[doc = "Power control"]
 pub struct PWR {
@@ -335,10 +390,10 @@ pub struct Peripherals {
     pub AFIO: AFIO,
     #[doc = "EXTI"]
     pub EXTI: EXTI,
-    // #[doc = "DMA1"]
-    // pub DMA1: DMA1,
-    // #[doc = "DMA2"]
-    // pub DMA2: DMA2,
+    #[doc = "DMA1"]
+    pub DMA1: DMA1,
+    #[doc = "DMA2"]
+    pub DMA2: DMA2,
     // #[doc = "RTC"]
     // pub RTC: RTC,
     // #[doc = "BKP"]
@@ -492,12 +547,12 @@ impl Peripherals {
             EXTI: EXTI {
                 _marker: PhantomData,
             },
-            // DMA1: DMA1 {
-            //     _marker: PhantomData,
-            // },
-            // DMA2: DMA2 {
-            //     _marker: PhantomData,
-            // },
+            DMA1: DMA1 {
+                _marker: PhantomData,
+            },
+            DMA2: DMA2 {
+                _marker: PhantomData,
+            },
             // RTC: RTC {
             //     _marker: PhantomData,
             // },
