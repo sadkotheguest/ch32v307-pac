@@ -237,6 +237,57 @@ impl core::fmt::Debug for DMA2 {
 
 #[doc = "DMA2 controller"]
 pub mod dma2;
+
+// -------------------------- RTC ----------------------------------
+#[doc = "Real time clock"]
+pub struct RTC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for RTC {}
+impl RTC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const rtc::RegisterBlock = 0x4000_2800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const rtc::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for RTC {
+    type Target = rtc::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Real time clock"]
+pub mod rtc;
+
+// -------------------------- DAC ----------------------------------
+#[doc = "Digital to analog converter"]
+pub struct DAC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for DAC {}
+impl DAC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const dac::RegisterBlock = 0x4000_7400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const dac::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for DAC {
+    type Target = dac::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Digital to analog converter"]
+pub mod dac;
+
 // -------------------------- PWR ----------------------------------
 #[doc = "Power control"]
 pub struct PWR {
@@ -366,8 +417,8 @@ pub struct Peripherals {
     // pub FSMC: FSMC,
     // #[doc = "DVP"]
     // pub DVP: DVP,
-    // #[doc = "DAC"]
-    // pub DAC: DAC,
+    #[doc = "DAC"]
+    pub DAC: DAC,
     #[doc = "PWR"]
     pub PWR: PWR,
     #[doc = "RCC"]
@@ -394,8 +445,8 @@ pub struct Peripherals {
     pub DMA1: DMA1,
     #[doc = "DMA2"]
     pub DMA2: DMA2,
-    // #[doc = "RTC"]
-    // pub RTC: RTC,
+    #[doc = "RTC"]
+    pub RTC: RTC,
     // #[doc = "BKP"]
     // pub BKP: BKP,
     // #[doc = "IWDG"]
@@ -511,9 +562,9 @@ impl Peripherals {
             // DVP: DVP {
             //     _marker: PhantomData,
             // },
-            // DAC: DAC {
-            //     _marker: PhantomData,
-            // },
+            DAC: DAC {
+                _marker: PhantomData,
+            },
             PWR: PWR {
                 _marker: PhantomData,
             },
@@ -553,9 +604,9 @@ impl Peripherals {
             DMA2: DMA2 {
                 _marker: PhantomData,
             },
-            // RTC: RTC {
-            //     _marker: PhantomData,
-            // },
+            RTC: RTC {
+                _marker: PhantomData,
+            },
             // BKP: BKP {
             //     _marker: PhantomData,
             // },
