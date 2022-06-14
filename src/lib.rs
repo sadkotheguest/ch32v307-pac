@@ -343,6 +343,103 @@ impl Deref for RTC {
 #[doc = "Real time clock"]
 pub mod rtc;
 
+// ------------------- Advanced timers -----------------------------
+#[doc = "Advanced timer"]
+pub struct TIM1 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIM1 {}
+impl TIM1 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const tim1::RegisterBlock = 0x4001_2c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const tim1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIM1 {
+    type Target = tim1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Advanced timer"]
+pub mod tim1;
+//-----
+#[doc = "Advanced timer"]
+pub struct TIM8 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIM8 {}
+impl TIM8 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const tim1::RegisterBlock = 0x4000_0400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const tim1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIM8 {
+    type Target = tim1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Advanced timer"]
+pub use tim1 as tim8;
+//-----
+#[doc = "Advanced timer"]
+pub struct TIM9 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIM9 {}
+impl TIM9 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const tim1::RegisterBlock = 0x4001_4c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const tim1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIM9 {
+    type Target = tim1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Advanced timer"]
+pub use tim1 as tim9;
+//-----
+#[doc = "Advanced timer"]
+pub struct TIM10 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIM10 {}
+impl TIM10 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const tim1::RegisterBlock = 0x4001_5000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const tim1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIM10 {
+    type Target = tim1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Advanced timer"]
+pub use tim1 as tim10;
+
 // -------------------------- I2C ----------------------------------
 #[doc = "Inter integrated circuit"]
 pub struct I2C1 {
@@ -582,14 +679,14 @@ pub struct Peripherals {
     // pub IWDG: IWDG,
     // #[doc = "WWDG"]
     // pub WWDG: WWDG,
-    // #[doc = "TIM1"]
-    // pub TIM1: TIM1,
-    // #[doc = "TIM8"]
-    // pub TIM8: TIM8,
-    // #[doc = "TIM9"]
-    // pub TIM9: TIM9,
-    // #[doc = "TIM10"]
-    // pub TIM10: TIM10,
+    #[doc = "TIM1"]
+    pub TIM1: TIM1,
+    #[doc = "TIM8"]
+    pub TIM8: TIM8,
+    #[doc = "TIM9"]
+    pub TIM9: TIM9,
+    #[doc = "TIM10"]
+    pub TIM10: TIM10,
     // #[doc = "TIM2"]
     // pub TIM2: TIM2,
     // #[doc = "TIM3"]
@@ -745,18 +842,18 @@ impl Peripherals {
             // WWDG: WWDG {
             //     _marker: PhantomData,
             // },
-            // TIM1: TIM1 {
-            //     _marker: PhantomData,
-            // },
-            // TIM8: TIM8 {
-            //     _marker: PhantomData,
-            // },
-            // TIM9: TIM9 {
-            //     _marker: PhantomData,
-            // },
-            // TIM10: TIM10 {
-            //     _marker: PhantomData,
-            // },
+            TIM1: TIM1 {
+                _marker: PhantomData,
+            },
+            TIM8: TIM8 {
+                _marker: PhantomData,
+            },
+            TIM9: TIM9 {
+                _marker: PhantomData,
+            },
+            TIM10: TIM10 {
+                _marker: PhantomData,
+            },
             // TIM2: TIM2 {
             //     _marker: PhantomData,
             // },

@@ -23,7 +23,7 @@ Peripherials:
 * BKP [-]
 * IWDG [-]
 * WWDG [-]
-* Advanced timers [-]
+* Advanced timers: TIM1 [+], TIM8 [+], TIM9 [+], TIM10 [+]
 * General purpose timers [-]
 * I2C1 [+], I2C2 [+]
 * SPI1 [-], SPI2 [-], SPI3 [-]
