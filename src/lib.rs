@@ -343,6 +343,55 @@ impl Deref for RTC {
 #[doc = "Real time clock"]
 pub mod rtc;
 
+// -------------------------- I2C ----------------------------------
+#[doc = "Inter integrated circuit"]
+pub struct I2C1 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for I2C1 {}
+impl I2C1 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const i2c1::RegisterBlock = 0x4000_5400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const i2c1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for I2C1 {
+    type Target = i2c1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Inter integrated circuit"]
+pub mod i2c1;
+
+#[doc = "Inter integrated circuit"]
+pub struct I2C2 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for I2C2 {}
+impl I2C2 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const i2c1::RegisterBlock = 0x4000_5800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const i2c1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for I2C2 {
+    type Target = i2c1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Inter integrated circuit"]
+pub use i2c1 as i2c2;
+
 // -------------------------- DAC ----------------------------------
 #[doc = "Digital to analog converter"]
 pub struct DAC {
@@ -549,10 +598,10 @@ pub struct Peripherals {
     // pub TIM4: TIM4,
     // #[doc = "TIM5"]
     // pub TIM5: TIM5,
-    // #[doc = "I2C1"]
-    // pub I2C1: I2C1,
-    // #[doc = "I2C2"]
-    // pub I2C2: I2C2,
+    #[doc = "I2C1"]
+    pub I2C1: I2C1,
+    #[doc = "I2C2"]
+    pub I2C2: I2C2,
     // #[doc = "SPI1"]
     // pub SPI1: SPI1,
     // #[doc = "SPI2"]
@@ -720,12 +769,12 @@ impl Peripherals {
             // TIM5: TIM5 {
             //     _marker: PhantomData,
             // },
-            // I2C1: I2C1 {
-            //     _marker: PhantomData,
-            // },
-            // I2C2: I2C2 {
-            //     _marker: PhantomData,
-            // },
+            I2C1: I2C1 {
+                _marker: PhantomData,
+            },
+            I2C2: I2C2 {
+                _marker: PhantomData,
+            },
             // SPI1: SPI1 {
             //     _marker: PhantomData,
             // },
