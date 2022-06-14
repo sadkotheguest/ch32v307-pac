@@ -107,6 +107,31 @@ impl Deref for CAN2 {
 #[doc = "Controller area network"]
 pub use can1 as can2;
 
+// --------------------------- SDIO ----------------------------------
+#[doc = "Secure digital input/output interface"]
+pub struct SDIO {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SDIO {}
+impl SDIO {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const sdio::RegisterBlock = 0x4001_8000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const sdio::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SDIO {
+    type Target = sdio::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Secure digital input/output interface"]
+pub mod sdio;
+
 // -------------------------- GPIOA ----------------------------------
 #[doc = "General purpose I/O"]
 pub struct GPIOA {
@@ -411,8 +436,8 @@ pub struct Peripherals {
     // pub ETHERNET_PTP: ETHERNET_PTP,
     // #[doc = "ETHERNET_DMA"]
     // pub ETHERNET_DMA: ETHERNET_DMA,
-    // #[doc = "SDIO"]
-    // pub SDIO: SDIO,
+    #[doc = "SDIO"]
+    pub SDIO: SDIO,
     // #[doc = "FSMC"]
     // pub FSMC: FSMC,
     // #[doc = "DVP"]
@@ -553,9 +578,9 @@ impl Peripherals {
             // ETHERNET_DMA: ETHERNET_DMA {
             //     _marker: PhantomData,
             // },
-            // SDIO: SDIO {
-            //     _marker: PhantomData,
-            // },
+            SDIO: SDIO {
+                _marker: PhantomData,
+            },
             // FSMC: FSMC {
             //     _marker: PhantomData,
             // },
