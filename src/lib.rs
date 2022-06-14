@@ -58,6 +58,36 @@ impl Deref for TRNG {
 #[doc = "Random number generator"]
 pub mod trng;
 
+// ---------------------------- USB ----------------------------------
+#[doc = "Universal serial bus full-speed device interface"]
+pub struct USB {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for USB {}
+impl USB {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usb::RegisterBlock = 0x4000_5c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usb::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for USB {
+    type Target = usb::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for USB {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("USB").finish()
+    }
+}
+#[doc = "Universal serial bus full-speed device interface"]
+pub mod usb;
+
 // --------------------------- CAN -----------------------------------
 #[doc = "Controller area network CAN1"]
 pub struct CAN1 {
@@ -447,8 +477,8 @@ static mut DEVICE_PERIPHERALS: bool = false;
 pub struct Peripherals {
     #[doc = "TRNG"]
     pub TRNG: TRNG,
-    // #[doc = "USB"]
-    // pub USB: USB,
+    #[doc = "USB"]
+    pub USB: USB,
     #[doc = "CAN1"]
     pub CAN1: CAN1,
     #[doc = "CAN2"]
@@ -582,9 +612,9 @@ impl Peripherals {
             TRNG: TRNG {
                 _marker: PhantomData,
             },
-            // USB: USB {
-            //     _marker: PhantomData,
-            // },
+            USB: USB {
+                _marker: PhantomData,
+            },
             CAN1: CAN1 {
                 _marker: PhantomData,
             },
