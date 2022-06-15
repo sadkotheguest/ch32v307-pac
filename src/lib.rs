@@ -292,6 +292,31 @@ impl Deref for FSMC {
 #[doc = "Flexible static memory controller"]
 pub mod fsmc;
 
+// ---------------------------- DVP ----------------------------------
+#[doc = "Digital Video Port"]
+pub struct DVP {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for DVP {}
+impl DVP {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const dvp::RegisterBlock = 0x5005_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const dvp::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for DVP {
+    type Target = dvp::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Digital Video Port"]
+pub mod dvp;
+
 // -------------------------- GPIOA ----------------------------------
 #[doc = "General purpose I/O"]
 pub struct GPIOA {
@@ -545,6 +570,108 @@ impl Deref for TIM10 {
 #[doc = "Advanced timer"]
 pub use tim1 as tim10;
 
+// ---------------- General purpose timers -------------------------
+#[doc = "General purpose timer"]
+pub struct TIM2 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIM2 {}
+impl TIM2 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const tim2::RegisterBlock = 0x4000_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const tim2::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIM2 {
+    type Target = tim2::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for TIM2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("TIM2").finish()
+    }
+}
+#[doc = "General purpose timer"]
+pub mod tim2;
+//-----
+#[doc = "General purpose timer"]
+pub struct TIM3 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIM3 {}
+impl TIM3 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const tim2::RegisterBlock = 0x4000_0400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const tim2::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIM3 {
+    type Target = tim2::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "General purpose timer"]
+pub use tim2 as tim3;
+//-----
+#[doc = "General purpose timer"]
+pub struct TIM4 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIM4 {}
+impl TIM4 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const tim2::RegisterBlock = 0x4000_0800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const tim2::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIM4 {
+    type Target = tim2::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "General purpose timer"]
+pub use tim2 as tim4;
+//-----
+#[doc = "General purpose timer"]
+pub struct TIM5 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for TIM5 {}
+impl TIM5 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const tim2::RegisterBlock = 0x4000_0c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const tim2::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for TIM5 {
+    type Target = tim2::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "General purpose timer"]
+pub use tim2 as tim5;
+
 // -------------------------- I2C ----------------------------------
 #[doc = "Inter integrated circuit"]
 pub struct I2C1 {
@@ -746,8 +873,8 @@ pub struct Peripherals {
     pub SDIO: SDIO,
     #[doc = "FSMC"]
     pub FSMC: FSMC,
-    // #[doc = "DVP"]
-    // pub DVP: DVP,
+    #[doc = "DVP"]
+    pub DVP: DVP,
     #[doc = "DAC"]
     pub DAC: DAC,
     #[doc = "PWR"]
@@ -792,14 +919,14 @@ pub struct Peripherals {
     pub TIM9: TIM9,
     #[doc = "TIM10"]
     pub TIM10: TIM10,
-    // #[doc = "TIM2"]
-    // pub TIM2: TIM2,
-    // #[doc = "TIM3"]
-    // pub TIM3: TIM3,
-    // #[doc = "TIM4"]
-    // pub TIM4: TIM4,
-    // #[doc = "TIM5"]
-    // pub TIM5: TIM5,
+    #[doc = "TIM2"]
+    pub TIM2: TIM2,
+    #[doc = "TIM3"]
+    pub TIM3: TIM3,
+    #[doc = "TIM4"]
+    pub TIM4: TIM4,
+    #[doc = "TIM5"]
+    pub TIM5: TIM5,
     #[doc = "I2C1"]
     pub I2C1: I2C1,
     #[doc = "I2C2"]
@@ -890,9 +1017,9 @@ impl Peripherals {
             FSMC: FSMC {
                 _marker: PhantomData,
             },
-            // DVP: DVP {
-            //     _marker: PhantomData,
-            // },
+            DVP: DVP {
+                _marker: PhantomData,
+            },
             DAC: DAC {
                 _marker: PhantomData,
             },
@@ -959,18 +1086,18 @@ impl Peripherals {
             TIM10: TIM10 {
                 _marker: PhantomData,
             },
-            // TIM2: TIM2 {
-            //     _marker: PhantomData,
-            // },
-            // TIM3: TIM3 {
-            //     _marker: PhantomData,
-            // },
-            // TIM4: TIM4 {
-            //     _marker: PhantomData,
-            // },
-            // TIM5: TIM5 {
-            //     _marker: PhantomData,
-            // },
+            TIM2: TIM2 {
+                _marker: PhantomData,
+            },
+            TIM3: TIM3 {
+                _marker: PhantomData,
+            },
+            TIM4: TIM4 {
+                _marker: PhantomData,
+            },
+            TIM5: TIM5 {
+                _marker: PhantomData,
+            },
             I2C1: I2C1 {
                 _marker: PhantomData,
             },
