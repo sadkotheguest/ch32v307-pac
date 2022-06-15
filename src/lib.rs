@@ -137,6 +137,111 @@ impl Deref for CAN2 {
 #[doc = "Controller area network"]
 pub use can1 as can2;
 
+// ------------------------- ETH_MAC ---------------------------------
+#[doc = "Ethernet: media access control"]
+pub struct ETHERNET_MAC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for ETHERNET_MAC {}
+impl ETHERNET_MAC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const ethernet_mac::RegisterBlock = 0x4002_8000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const ethernet_mac::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for ETHERNET_MAC {
+    type Target = ethernet_mac::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Ethernet: media access control"]
+pub mod ethernet_mac;
+
+// ------------------------- ETH_MMC --------------------------------
+#[doc = "Ethernet: MAC management counters"]
+pub struct ETHERNET_MMC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for ETHERNET_MMC {}
+impl ETHERNET_MMC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const ethernet_mmc::RegisterBlock = 0x4002_8100 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const ethernet_mmc::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for ETHERNET_MMC {
+    type Target = ethernet_mmc::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Ethernet: MAC management counters"]
+pub mod ethernet_mmc;
+
+// ------------------------- ETH_PTP --------------------------------
+#[doc = "Ethernet: Precision time protocol"]
+pub struct ETHERNET_PTP {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for ETHERNET_PTP {}
+impl ETHERNET_PTP {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const ethernet_ptp::RegisterBlock = 0x4002_8700 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const ethernet_ptp::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for ETHERNET_PTP {
+    type Target = ethernet_ptp::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Ethernet: Precision time protocol"]
+pub mod ethernet_ptp;
+
+// ------------------------- ETH_DMA --------------------------------
+#[doc = "Ethernet: DMA controller operation"]
+pub struct ETHERNET_DMA {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for ETHERNET_DMA {}
+impl ETHERNET_DMA {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const ethernet_dma::RegisterBlock = 0x4002_9000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const ethernet_dma::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for ETHERNET_DMA {
+    type Target = ethernet_dma::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for ETHERNET_DMA {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ETHERNET_DMA").finish()
+    }
+}
+#[doc = "Ethernet: DMA controller operation"]
+pub mod ethernet_dma;
+
 // --------------------------- SDIO ----------------------------------
 #[doc = "Secure digital input/output interface"]
 pub struct SDIO {
@@ -629,14 +734,14 @@ pub struct Peripherals {
     pub CAN1: CAN1,
     #[doc = "CAN2"]
     pub CAN2: CAN2,
-    // #[doc = "ETHERNET_MAC"]
-    // pub ETHERNET_MAC: ETHERNET_MAC,
-    // #[doc = "ETHERNET_MMC"]
-    // pub ETHERNET_MMC: ETHERNET_MMC,
-    // #[doc = "ETHERNET_PTP"]
-    // pub ETHERNET_PTP: ETHERNET_PTP,
-    // #[doc = "ETHERNET_DMA"]
-    // pub ETHERNET_DMA: ETHERNET_DMA,
+    #[doc = "ETHERNET_MAC"]
+    pub ETHERNET_MAC: ETHERNET_MAC,
+    #[doc = "ETHERNET_MMC"]
+    pub ETHERNET_MMC: ETHERNET_MMC,
+    #[doc = "ETHERNET_PTP"]
+    pub ETHERNET_PTP: ETHERNET_PTP,
+    #[doc = "ETHERNET_DMA"]
+    pub ETHERNET_DMA: ETHERNET_DMA,
     #[doc = "SDIO"]
     pub SDIO: SDIO,
     #[doc = "FSMC"]
@@ -767,18 +872,18 @@ impl Peripherals {
             CAN2: CAN2 {
                 _marker: PhantomData,
             },
-            // ETHERNET_MAC: ETHERNET_MAC {
-            //     _marker: PhantomData,
-            // },
-            // ETHERNET_MMC: ETHERNET_MMC {
-            //     _marker: PhantomData,
-            // },
-            // ETHERNET_PTP: ETHERNET_PTP {
-            //     _marker: PhantomData,
-            // },
-            // ETHERNET_DMA: ETHERNET_DMA {
-            //     _marker: PhantomData,
-            // },
+            ETHERNET_MAC: ETHERNET_MAC {
+                _marker: PhantomData,
+            },
+            ETHERNET_MMC: ETHERNET_MMC {
+                _marker: PhantomData,
+            },
+            ETHERNET_PTP: ETHERNET_PTP {
+                _marker: PhantomData,
+            },
+            ETHERNET_DMA: ETHERNET_DMA {
+                _marker: PhantomData,
+            },
             SDIO: SDIO {
                 _marker: PhantomData,
             },
