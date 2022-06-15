@@ -721,6 +721,89 @@ impl Deref for I2C2 {
 #[doc = "Inter integrated circuit"]
 pub use i2c1 as i2c2;
 
+// -------------------------- SPI1 ----------------------------------
+#[doc = "Serial peripheral interface"]
+pub struct SPI1 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SPI1 {}
+impl SPI1 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const spi1::RegisterBlock = 0x4001_3000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const spi1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SPI1 {
+    type Target = spi1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Serial peripheral interface"]
+pub mod spi1;
+//-----
+#[doc = "Serial peripheral interface"]
+pub struct SPI2 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SPI2 {}
+impl SPI2 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const spi2::RegisterBlock = 0x4000_3800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const spi2::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SPI2 {
+    type Target = spi2::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for SPI2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SPI2").finish()
+    }
+}
+#[doc = "Serial peripheral interface"]
+pub mod spi2;
+//-----
+#[doc = "Serial peripheral interface"]
+pub struct SPI3 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SPI3 {}
+impl SPI3 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const spi2::RegisterBlock = 0x4000_3c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const spi2::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for SPI3 {
+    type Target = spi2::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for SPI3 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("SPI3").finish()
+    }
+}
+#[doc = "Serial peripheral interface"]
+pub use spi2 as spi3;
+
 // -------------------------- DAC ----------------------------------
 #[doc = "Digital to analog converter"]
 pub struct DAC {
@@ -931,12 +1014,12 @@ pub struct Peripherals {
     pub I2C1: I2C1,
     #[doc = "I2C2"]
     pub I2C2: I2C2,
-    // #[doc = "SPI1"]
-    // pub SPI1: SPI1,
-    // #[doc = "SPI2"]
-    // pub SPI2: SPI2,
-    // #[doc = "SPI3"]
-    // pub SPI3: SPI3,
+    #[doc = "SPI1"]
+    pub SPI1: SPI1,
+    #[doc = "SPI2"]
+    pub SPI2: SPI2,
+    #[doc = "SPI3"]
+    pub SPI3: SPI3,
     // #[doc = "USART1"]
     // pub USART1: USART1,
     // #[doc = "USART2"]
@@ -1104,15 +1187,15 @@ impl Peripherals {
             I2C2: I2C2 {
                 _marker: PhantomData,
             },
-            // SPI1: SPI1 {
-            //     _marker: PhantomData,
-            // },
-            // SPI2: SPI2 {
-            //     _marker: PhantomData,
-            // },
-            // SPI3: SPI3 {
-            //     _marker: PhantomData,
-            // },
+            SPI1: SPI1 {
+                _marker: PhantomData,
+            },
+            SPI2: SPI2 {
+                _marker: PhantomData,
+            },
+            SPI3: SPI3 {
+                _marker: PhantomData,
+            },
             // USART1: USART1 {
             //     _marker: PhantomData,
             // },
