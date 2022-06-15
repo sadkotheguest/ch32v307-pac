@@ -1002,6 +1002,61 @@ impl Deref for UART8 {
 #[doc = "Universal synchronous asynchronous receiver transmitter"]
 pub use usart1 as uart8;
 
+// -------------------------- ADC ----------------------------------
+#[doc = "Analog to digital converter"]
+pub struct ADC1 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for ADC1 {}
+impl ADC1 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const adc1::RegisterBlock = 0x4001_2400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const adc1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for ADC1 {
+    type Target = adc1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for ADC1 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ADC1").finish()
+    }
+}
+#[doc = "Analog to digital converter"]
+pub mod adc1;
+
+//-----
+#[doc = "Analog to digital converter"]
+pub struct ADC2 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for ADC2 {}
+impl ADC2 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const adc2::RegisterBlock = 0x4001_2800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const adc2::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for ADC2 {
+    type Target = adc2::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Analog to digital converter"]
+pub mod adc2;
+
 // -------------------------- DAC ----------------------------------
 #[doc = "Digital to analog converter"]
 pub struct DAC {
@@ -1234,10 +1289,10 @@ pub struct Peripherals {
     pub UART7: UART7,
     #[doc = "UART8"]
     pub UART8: UART8,
-    // #[doc = "ADC1"]
-    // pub ADC1: ADC1,
-    // #[doc = "ADC2"]
-    // pub ADC2: ADC2,
+    #[doc = "ADC1"]
+    pub ADC1: ADC1,
+    #[doc = "ADC2"]
+    pub ADC2: ADC2,
     // #[doc = "DBG"]
     // pub DBG: DBG,
     // #[doc = "USBHD"]
@@ -1418,12 +1473,12 @@ impl Peripherals {
             UART8: UART8 {
                 _marker: PhantomData,
             },
-            // ADC1: ADC1 {
-            //     _marker: PhantomData,
-            // },
-            // ADC2: ADC2 {
-            //     _marker: PhantomData,
-            // },
+            ADC1: ADC1 {
+                _marker: PhantomData,
+            },
+            ADC2: ADC2 {
+                _marker: PhantomData,
+            },
             // DBG: DBG {
             //     _marker: PhantomData,
             // },
