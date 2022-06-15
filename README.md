@@ -27,7 +27,7 @@ Peripherials:
 * General purpose timers: TIM2 [+], TIM3 [+], TIM4 [+], TIM5 [+] 
 * I2C1 [+], I2C2 [+]
 * SPI1 [+], SPI2 [+], SPI3 [+]
-* USART1...USART3 [-], UART4...UART8 [-]
+* USART1...USART3 [+], UART4...UART8 [+]
 * ADC1 [-], ADC2 [-]
 * DBG [-]
 * USBHD [-]

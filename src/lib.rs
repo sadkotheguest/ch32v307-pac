@@ -804,6 +804,204 @@ impl core::fmt::Debug for SPI3 {
 #[doc = "Serial peripheral interface"]
 pub use spi2 as spi3;
 
+// -------------------------- USART --------------------------------
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub struct USART1 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for USART1 {}
+impl USART1 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usart1::RegisterBlock = 0x4001_3800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usart1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for USART1 {
+    type Target = usart1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub mod usart1;
+//-----
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub struct USART2 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for USART2 {}
+impl USART2 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usart1::RegisterBlock = 0x4000_4400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usart1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for USART2 {
+    type Target = usart1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub use usart1 as usart2;
+//-----
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub struct USART3 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for USART3 {}
+impl USART3 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usart1::RegisterBlock = 0x4000_4800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usart1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for USART3 {
+    type Target = usart1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub use usart1 as usart3;
+//-----
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub struct UART4 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for UART4 {}
+impl UART4 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usart1::RegisterBlock = 0x4000_4c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usart1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for UART4 {
+    type Target = usart1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for UART4 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("UART4").finish()
+    }
+}
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub use usart1 as uart4;
+//-----
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub struct UART5 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for UART5 {}
+impl UART5 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usart1::RegisterBlock = 0x4000_5000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usart1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for UART5 {
+    type Target = usart1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub use usart1 as uart5;
+//-----
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub struct UART6 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for UART6 {}
+impl UART6 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usart1::RegisterBlock = 0x4000_1800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usart1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for UART6 {
+    type Target = usart1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub use usart1 as uart6;
+//-----
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub struct UART7 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for UART7 {}
+impl UART7 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usart1::RegisterBlock = 0x4000_1c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usart1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for UART7 {
+    type Target = usart1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub use usart1 as uart7;
+//-----
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub struct UART8 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for UART8 {}
+impl UART8 {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usart1::RegisterBlock = 0x4000_2000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usart1::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for UART8 {
+    type Target = usart1::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Universal synchronous asynchronous receiver transmitter"]
+pub use usart1 as uart8;
+
 // -------------------------- DAC ----------------------------------
 #[doc = "Digital to analog converter"]
 pub struct DAC {
@@ -1020,22 +1218,22 @@ pub struct Peripherals {
     pub SPI2: SPI2,
     #[doc = "SPI3"]
     pub SPI3: SPI3,
-    // #[doc = "USART1"]
-    // pub USART1: USART1,
-    // #[doc = "USART2"]
-    // pub USART2: USART2,
-    // #[doc = "USART3"]
-    // pub USART3: USART3,
-    // #[doc = "UART4"]
-    // pub UART4: UART4,
-    // #[doc = "UART5"]
-    // pub UART5: UART5,
-    // #[doc = "UART6"]
-    // pub UART6: UART6,
-    // #[doc = "UART7"]
-    // pub UART7: UART7,
-    // #[doc = "UART8"]
-    // pub UART8: UART8,
+    #[doc = "USART1"]
+    pub USART1: USART1,
+    #[doc = "USART2"]
+    pub USART2: USART2,
+    #[doc = "USART3"]
+    pub USART3: USART3,
+    #[doc = "UART4"]
+    pub UART4: UART4,
+    #[doc = "UART5"]
+    pub UART5: UART5,
+    #[doc = "UART6"]
+    pub UART6: UART6,
+    #[doc = "UART7"]
+    pub UART7: UART7,
+    #[doc = "UART8"]
+    pub UART8: UART8,
     // #[doc = "ADC1"]
     // pub ADC1: ADC1,
     // #[doc = "ADC2"]
@@ -1196,30 +1394,30 @@ impl Peripherals {
             SPI3: SPI3 {
                 _marker: PhantomData,
             },
-            // USART1: USART1 {
-            //     _marker: PhantomData,
-            // },
-            // USART2: USART2 {
-            //     _marker: PhantomData,
-            // },
-            // USART3: USART3 {
-            //     _marker: PhantomData,
-            // },
-            // UART4: UART4 {
-            //     _marker: PhantomData,
-            // },
-            // UART5: UART5 {
-            //     _marker: PhantomData,
-            // },
-            // UART6: UART6 {
-            //     _marker: PhantomData,
-            // },
-            // UART7: UART7 {
-            //     _marker: PhantomData,
-            // },
-            // UART8: UART8 {
-            //     _marker: PhantomData,
-            // },
+            USART1: USART1 {
+                _marker: PhantomData,
+            },
+            USART2: USART2 {
+                _marker: PhantomData,
+            },
+            USART3: USART3 {
+                _marker: PhantomData,
+            },
+            UART4: UART4 {
+                _marker: PhantomData,
+            },
+            UART5: UART5 {
+                _marker: PhantomData,
+            },
+            UART6: UART6 {
+                _marker: PhantomData,
+            },
+            UART7: UART7 {
+                _marker: PhantomData,
+            },
+            UART8: UART8 {
+                _marker: PhantomData,
+            },
             // ADC1: ADC1 {
             //     _marker: PhantomData,
             // },
