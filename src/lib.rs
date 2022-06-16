@@ -1132,6 +1132,67 @@ impl Deref for RCC {
 #[doc = "Reset and clock control"]
 pub mod rcc;
 
+// -------------------------- DBG ----------------------------------
+#[doc = "Debug support"]
+pub struct DBG {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for DBG {}
+impl DBG {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const dbg::RegisterBlock = 0xe000_d000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const dbg::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for DBG {
+    type Target = dbg::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for DBG {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DBG").finish()
+    }
+}
+#[doc = "Debug support"]
+pub mod dbg;
+
+// ------------------------ USB HD ---------------------------------
+
+#[doc = "USB register"]
+pub struct USBHD {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for USBHD {}
+impl USBHD {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usbhd::RegisterBlock = 0x4002_3400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usbhd::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for USBHD {
+    type Target = usbhd::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for USBHD {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("USBHD").finish()
+    }
+}
+#[doc = "USB register"]
+pub mod usbhd;
+
 // -------------------------- CRC ----------------------------------
 #[doc = "CRC calculation unit"]
 pub struct CRC {
@@ -1293,10 +1354,10 @@ pub struct Peripherals {
     pub ADC1: ADC1,
     #[doc = "ADC2"]
     pub ADC2: ADC2,
-    // #[doc = "DBG"]
-    // pub DBG: DBG,
-    // #[doc = "USBHD"]
-    // pub USBHD: USBHD,
+    #[doc = "DBG"]
+    pub DBG: DBG,
+    #[doc = "USBHD"]
+    pub USBHD: USBHD,
     #[doc = "CRC"]
     pub CRC: CRC,
     #[doc = "FLASH"]
@@ -1479,12 +1540,12 @@ impl Peripherals {
             ADC2: ADC2 {
                 _marker: PhantomData,
             },
-            // DBG: DBG {
-            //     _marker: PhantomData,
-            // },
-            // USBHD: USBHD {
-            //     _marker: PhantomData,
-            // },
+            DBG: DBG {
+                _marker: PhantomData,
+            },
+            USBHD: USBHD {
+                _marker: PhantomData,
+            },
             CRC: CRC {
                 _marker: PhantomData,
             },
