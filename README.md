@@ -15,7 +15,7 @@ Peripherials:
 * PWR [+]
 * RCC [+]
 * OPA [+]
-* GPIOA [+], GPIOB [-], GPIOC [-], GPIOD [-], GPIOE [-]
+* GPIOA [+], GPIOB [+], GPIOC [+], GPIOD [+], GPIOE [+]
 * AFIO [+]
 * EXTI [+]
 * DMA1 [+], DMA2 [+]
