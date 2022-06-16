@@ -1489,8 +1489,37 @@ impl Deref for USBOTGFS {
 #[doc = "USB FS OTG register"]
 pub mod usbotgfs;
 
-// -----------------------------------------------------------------
+// ------------------------ PFIC -----------------------------------
+#[doc = "Programmable Fast Interrupt Controller"]
+pub struct PFIC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for PFIC {}
+impl PFIC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const pfic::RegisterBlock = 0xe000_e000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const pfic::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for PFIC {
+    type Target = pfic::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for PFIC {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("PFIC").finish()
+    }
+}
+#[doc = "Programmable Fast Interrupt Controller"]
+pub mod pfic;
 
+// -----------------------------------------------------------------
 #[no_mangle]
 static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r"All the peripherals"]
@@ -1610,8 +1639,8 @@ pub struct Peripherals {
     pub FLASH: FLASH,
     #[doc = "USBOTGFS"]
     pub USBOTGFS: USBOTGFS,
-    // #[doc = "PFIC"]
-    // pub PFIC: PFIC,
+    #[doc = "PFIC"]
+    pub PFIC: PFIC,
 }
 impl Peripherals {
     #[doc = r"Returns all the peripherals *once*"]
@@ -1801,9 +1830,9 @@ impl Peripherals {
             USBOTGFS: USBOTGFS {
                 _marker: PhantomData,
             },
-            // PFIC: PFIC {
-            //     _marker: PhantomData,
-            // },
+            PFIC: PFIC {
+                _marker: PhantomData,
+            },
         }
     }
 }
