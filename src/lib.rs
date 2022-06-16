@@ -317,6 +317,31 @@ impl Deref for DVP {
 #[doc = "Digital Video Port"]
 pub mod dvp;
 
+// --------------------------- OPA -----------------------------------
+#[doc = "OPA configuration"]
+pub struct OPA {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for OPA {}
+impl OPA {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const opa::RegisterBlock = 0x4002_3804 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const opa::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for OPA {
+    type Target = opa::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "OPA configuration"]
+pub mod opa;
+
 // -------------------------- GPIOA ----------------------------------
 #[doc = "General purpose I/O"]
 pub struct GPIOA {
@@ -472,6 +497,31 @@ impl Deref for RTC {
 }
 #[doc = "Real time clock"]
 pub mod rtc;
+
+// -------------------------- BKP ----------------------------------
+#[doc = "Backup registers"]
+pub struct BKP {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for BKP {}
+impl BKP {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const bkp::RegisterBlock = 0x4000_6c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const bkp::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for BKP {
+    type Target = bkp::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Backup registers"]
+pub mod bkp;
 
 // ------------------- Advanced timers -----------------------------
 #[doc = "Advanced timer"]
@@ -1305,8 +1355,8 @@ pub struct Peripherals {
     pub RCC: RCC,
     // #[doc = "EXTEND"]
     // pub EXTEND: EXTEND,
-    // #[doc = "OPA"]
-    // pub OPA: OPA,
+    #[doc = "OPA"]
+    pub OPA: OPA,
     #[doc = "GPIOA"]
     pub GPIOA: GPIOA,
     // #[doc = "GPIOB"]
@@ -1327,8 +1377,8 @@ pub struct Peripherals {
     pub DMA2: DMA2,
     #[doc = "RTC"]
     pub RTC: RTC,
-    // #[doc = "BKP"]
-    // pub BKP: BKP,
+    #[doc = "BKP"]
+    pub BKP: BKP,
     // #[doc = "IWDG"]
     // pub IWDG: IWDG,
     // #[doc = "WWDG"]
@@ -1454,9 +1504,9 @@ impl Peripherals {
             // EXTEND: EXTEND {
             //     _marker: PhantomData,
             // },
-            // OPA: OPA {
-            //     _marker: PhantomData,
-            // },
+            OPA: OPA {
+                _marker: PhantomData,
+            },
             GPIOA: GPIOA {
                 _marker: PhantomData,
             },
@@ -1487,9 +1537,9 @@ impl Peripherals {
             RTC: RTC {
                 _marker: PhantomData,
             },
-            // BKP: BKP {
-            //     _marker: PhantomData,
-            // },
+            BKP: BKP {
+                _marker: PhantomData,
+            },
             // IWDG: IWDG {
             //     _marker: PhantomData,
             // },
