@@ -34,4 +34,4 @@ Peripherials:
 * CRC [+]
 * FLASH [+]
 * USB FS OTG [+]
-* PFIC [-]
+* PFIC [+]
