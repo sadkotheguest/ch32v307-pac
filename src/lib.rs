@@ -366,6 +366,102 @@ impl Deref for GPIOA {
 }
 #[doc = "General purpose I/O (GPIO port A)"]
 pub mod gpioa;
+// -----
+#[doc = "General purpose I/O"]
+pub struct GPIOB {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for GPIOB {}
+impl GPIOB {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const gpioa::RegisterBlock = 0x4001_0c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const gpioa::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for GPIOB {
+    type Target = gpioa::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "General purpose I/O"]
+pub use gpioa as gpiob;
+// -----
+#[doc = "General purpose I/O"]
+pub struct GPIOC {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for GPIOC {}
+impl GPIOC {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const gpioa::RegisterBlock = 0x4001_1000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const gpioa::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for GPIOC {
+    type Target = gpioa::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "General purpose I/O"]
+pub use gpioa as gpioc;
+// -----
+#[doc = "General purpose I/O"]
+pub struct GPIOD {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for GPIOD {}
+impl GPIOD {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const gpioa::RegisterBlock = 0x4001_1400 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const gpioa::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for GPIOD {
+    type Target = gpioa::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "General purpose I/O"]
+pub use gpioa as gpiod;
+// -----
+#[doc = "General purpose I/O"]
+pub struct GPIOE {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for GPIOE {}
+impl GPIOE {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const gpioa::RegisterBlock = 0x4001_1800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const gpioa::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for GPIOE {
+    type Target = gpioa::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "General purpose I/O"]
+pub use gpioa as gpioe;
 
 // -------------------------- AFIO ---------------------------------
 #[doc = "Alternate function I/O"]
@@ -522,6 +618,56 @@ impl Deref for BKP {
 }
 #[doc = "Backup registers"]
 pub mod bkp;
+
+// -------------------------- IWDG ---------------------------------
+#[doc = "Independent watchdog"]
+pub struct IWDG {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for IWDG {}
+impl IWDG {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const iwdg::RegisterBlock = 0x4000_3000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const iwdg::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for IWDG {
+    type Target = iwdg::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Independent watchdog"]
+pub mod iwdg;
+
+// ------------------------- WWDG ----------------------------------
+#[doc = "Window watchdog"]
+pub struct WWDG {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for WWDG {}
+impl WWDG {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const wwdg::RegisterBlock = 0x4000_2c00 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const wwdg::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for WWDG {
+    type Target = wwdg::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Window watchdog"]
+pub mod wwdg;
 
 // ------------------- Advanced timers -----------------------------
 #[doc = "Advanced timer"]
@@ -1182,6 +1328,31 @@ impl Deref for RCC {
 #[doc = "Reset and clock control"]
 pub mod rcc;
 
+// ------------------------ EXTEND ---------------------------------
+#[doc = "Extend configuration"]
+pub struct EXTEND {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for EXTEND {}
+impl EXTEND {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const extend::RegisterBlock = 0x4002_3800 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const extend::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for EXTEND {
+    type Target = extend::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "Extend configuration"]
+pub mod extend;
+
 // -------------------------- DBG ----------------------------------
 #[doc = "Debug support"]
 pub struct DBG {
@@ -1353,20 +1524,20 @@ pub struct Peripherals {
     pub PWR: PWR,
     #[doc = "RCC"]
     pub RCC: RCC,
-    // #[doc = "EXTEND"]
-    // pub EXTEND: EXTEND,
+    #[doc = "EXTEND"]
+    pub EXTEND: EXTEND,
     #[doc = "OPA"]
     pub OPA: OPA,
     #[doc = "GPIOA"]
     pub GPIOA: GPIOA,
-    // #[doc = "GPIOB"]
-    // pub GPIOB: GPIOB,
-    // #[doc = "GPIOC"]
-    // pub GPIOC: GPIOC,
-    // #[doc = "GPIOD"]
-    // pub GPIOD: GPIOD,
-    // #[doc = "GPIOE"]
-    // pub GPIOE: GPIOE,
+    #[doc = "GPIOB"]
+    pub GPIOB: GPIOB,
+    #[doc = "GPIOC"]
+    pub GPIOC: GPIOC,
+    #[doc = "GPIOD"]
+    pub GPIOD: GPIOD,
+    #[doc = "GPIOE"]
+    pub GPIOE: GPIOE,
     #[doc = "AFIO"]
     pub AFIO: AFIO,
     #[doc = "EXTI"]
@@ -1379,10 +1550,10 @@ pub struct Peripherals {
     pub RTC: RTC,
     #[doc = "BKP"]
     pub BKP: BKP,
-    // #[doc = "IWDG"]
-    // pub IWDG: IWDG,
-    // #[doc = "WWDG"]
-    // pub WWDG: WWDG,
+    #[doc = "IWDG"]
+    pub IWDG: IWDG,
+    #[doc = "WWDG"]
+    pub WWDG: WWDG,
     #[doc = "TIM1"]
     pub TIM1: TIM1,
     #[doc = "TIM8"]
@@ -1501,27 +1672,27 @@ impl Peripherals {
             RCC: RCC {
                 _marker: PhantomData,
             },
-            // EXTEND: EXTEND {
-            //     _marker: PhantomData,
-            // },
+            EXTEND: EXTEND {
+                _marker: PhantomData,
+            },
             OPA: OPA {
                 _marker: PhantomData,
             },
             GPIOA: GPIOA {
                 _marker: PhantomData,
             },
-            // GPIOB: GPIOB {
-            //     _marker: PhantomData,
-            // },
-            // GPIOC: GPIOC {
-            //     _marker: PhantomData,
-            // },
-            // GPIOD: GPIOD {
-            //     _marker: PhantomData,
-            // },
-            // GPIOE: GPIOE {
-            //     _marker: PhantomData,
-            // },
+            GPIOB: GPIOB {
+                _marker: PhantomData,
+            },
+            GPIOC: GPIOC {
+                _marker: PhantomData,
+            },
+            GPIOD: GPIOD {
+                _marker: PhantomData,
+            },
+            GPIOE: GPIOE {
+                _marker: PhantomData,
+            },
             AFIO: AFIO {
                 _marker: PhantomData,
             },
@@ -1540,12 +1711,12 @@ impl Peripherals {
             BKP: BKP {
                 _marker: PhantomData,
             },
-            // IWDG: IWDG {
-            //     _marker: PhantomData,
-            // },
-            // WWDG: WWDG {
-            //     _marker: PhantomData,
-            // },
+            IWDG: IWDG {
+                _marker: PhantomData,
+            },
+            WWDG: WWDG {
+                _marker: PhantomData,
+            },
             TIM1: TIM1 {
                 _marker: PhantomData,
             },
