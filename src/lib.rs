@@ -1243,6 +1243,31 @@ impl Deref for FLASH {
 #[doc = "FLASH"]
 pub mod flash;
 
+// ----------------------- USBOTGFS ------------------------------
+#[doc = "USB FS OTG register"]
+pub struct USBOTGFS {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for USBOTGFS {}
+impl USBOTGFS {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const usbotgfs::RegisterBlock = 0x5000_0000 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const usbotgfs::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for USBOTGFS {
+    type Target = usbotgfs::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+#[doc = "USB FS OTG register"]
+pub mod usbotgfs;
+
 // -----------------------------------------------------------------
 
 #[no_mangle]
@@ -1362,8 +1387,8 @@ pub struct Peripherals {
     pub CRC: CRC,
     #[doc = "FLASH"]
     pub FLASH: FLASH,
-    // #[doc = "USBOTGFS"]
-    // pub USBOTGFS: USBOTGFS,
+    #[doc = "USBOTGFS"]
+    pub USBOTGFS: USBOTGFS,
     // #[doc = "PFIC"]
     // pub PFIC: PFIC,
 }
@@ -1552,9 +1577,9 @@ impl Peripherals {
             FLASH: FLASH {
                 _marker: PhantomData,
             },
-            // USBOTGFS: USBOTGFS {
-            //     _marker: PhantomData,
-            // },
+            USBOTGFS: USBOTGFS {
+                _marker: PhantomData,
+            },
             // PFIC: PFIC {
             //     _marker: PhantomData,
             // },
